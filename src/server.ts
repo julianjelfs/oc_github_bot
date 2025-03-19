@@ -19,6 +19,7 @@ const factory = new BotClientFactory({
 app.use(express.json());
 app.use(cors());
 app.get("/bot_definition", schema);
+app.get("/", schema);
 app.post("/pr_created", createApiKeyBotClient(factory), prCreated);
 
 app.listen(PORT, () => {
