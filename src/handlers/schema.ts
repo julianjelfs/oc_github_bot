@@ -3,19 +3,15 @@ import { Permissions } from "@open-ic/openchat-botclient-ts";
 
 export default function schema(_: Request, res: Response) {
   res.status(200).json({
-    description: "This is a test bot",
-    commands: [
-      {
-        name: "ping",
-        default_role: "Participant",
-        description: "Say pong",
-        permissions: Permissions.encodePermissions({
-          chat: [],
-          community: [],
-          message: ["Text"],
-        }),
-        params: [],
-      },
-    ],
+    description:
+      "This bot will act as a webhook to accept a PR notification from github and post it to a chat.",
+    autonomous_config: {
+      sync_api_key: true,
+      permissions: Permissions.encodePermissions({
+        message: ["Text"],
+        community: [],
+        chat: [],
+      }),
+    },
   });
 }
