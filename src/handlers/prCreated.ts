@@ -28,7 +28,9 @@ export default async function prCreated(req: Request, res: Response) {
       [${title}](${url})
       `
     )
-  ).setFinalised(true);
+  )
+    .setFinalised(true)
+    .setBlockLevelMarkdown(true);
 
   client
     .sendMessage(msg)
