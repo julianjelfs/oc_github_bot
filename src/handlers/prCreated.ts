@@ -19,21 +19,14 @@ export default async function prCreated(req: Request, res: Response) {
   };
 
   const client = req.botClient;
-
-  const msg = (
-    await client.createTextMessage(
-      `
-      ## A PR has been created in the ${repo} repository by ${author}
-      
-      [${title}](${url})
-      `
-    )
-  )
-    .setFinalised(true)
-    .setBlockLevelMarkdown(true);
-
   client
-    .sendMessage(msg)
+    .sendMessage(
+      (
+        await client.createTextMessage(
+          `A PR has been created in the **${repo}** repository by **@${author}**\n\n**[${title}](${url})**`
+        )
+      ).setFinalised(true)
+    )
     .catch((err) => console.error("sendMessage failed with: ", err));
 
   res.sendStatus(200);
